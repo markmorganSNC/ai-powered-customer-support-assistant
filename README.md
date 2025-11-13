@@ -39,7 +39,7 @@ az ad app create --display-name "AiSupportAssistant" --reply-urls "https://local
 az cognitiveservices account keys list --name MyLanguageService --resource-group MyAIResourceGroup
 ```
 
-![Architecture Diagram](https://eu-prod.asyncgw.teams.microsoft.com/v1/objects/0-suk-d4-5593454530dce1e450397a90b9450239/views/original/87910e6f31.png)
+![Architecture Diagram](https://github.com/markmorganSNC/ai-powered-customer-support-assistant/blob/main/ProjectArchitecture.png)
 
 ---
 
