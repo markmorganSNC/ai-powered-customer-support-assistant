@@ -2,39 +2,66 @@
 
 ---
 
-## Setting Up Azure AI Foundry Resources with CLI
+## Setting Up Azure AI Foundry Resources
 
-### Step 1: Create Resource Group
+### **Option 1: Using Azure Portal**
+
+1. **Sign in to Azure Portal**: [https://portal.azure.com](https://portal.azure.com)
+2. **Create Resource Group**:
+   - Navigate to **Resource Groups** > **Create**.
+   - Enter name (e.g., `MyAIResourceGroup`) and select region.
+3. **Create Azure AI Foundry Resource**:
+   - Search for **Azure AI Foundry** in the marketplace.
+   - Click **Create** and provide:
+     - Subscription, Resource Group, Region.
+     - Resource Name (e.g., `MyAIFoundry`).
+   - Click **Review + Create**.
+4. **Add Cognitive Services**:
+   - Navigate to the AI Foundry resource.
+   - Add **Language Service**, **Computer Vision**, and **Speech Service**.
+   - Configure pricing tier (e.g., `S`) and region.
+5. **Configure Azure AD Authentication**:
+   - Go to **Azure Active Directory** > **App Registrations**.
+   - Register your app and set redirect URI (e.g., `https://localhost/signin-oidc`).
+6. **Retrieve Keys and Endpoints**:
+   - Navigate to each Cognitive Service resource.
+   - Copy **Endpoint** and **Keys** for SDK integration.
+
+---
+
+### **Option 2: Using Azure CLI**
+
+#### Step 1: Create Resource Group
 ```bash
 az group create --name MyAIResourceGroup --location westeurope
 ```
 
-### Step 2: Create Azure AI Foundry Resource
+#### Step 2: Create Azure AI Foundry Resource
 ```bash
 az resource create   --resource-group MyAIResourceGroup   --name MyAIFoundry   --resource-type "Microsoft.AI/foundry"   --location westeurope   --properties '{}'
 ```
 
-### Step 3: Create Language Service
+#### Step 3: Create Language Service
 ```bash
 az cognitiveservices account create   --name MyLanguageService   --resource-group MyAIResourceGroup   --kind Language   --sku S   --location westeurope   --yes
 ```
 
-### Step 4: Create Computer Vision Service
+#### Step 4: Create Computer Vision Service
 ```bash
 az cognitiveservices account create   --name MyVisionService   --resource-group MyAIResourceGroup   --kind ComputerVision   --sku S   --location westeurope   --yes
 ```
 
-### Step 5: Create Speech Service
+#### Step 5: Create Speech Service
 ```bash
 az cognitiveservices account create   --name MySpeechService   --resource-group MyAIResourceGroup   --kind Speech   --sku S   --location westeurope   --yes
 ```
 
-### Step 6: Configure Azure AD Authentication
+#### Step 6: Configure Azure AD Authentication
 ```bash
 az ad app create --display-name "AiSupportAssistant" --reply-urls "https://localhost/signin-oidc"
 ```
 
-### Step 7: Retrieve Keys and Endpoints
+#### Step 7: Retrieve Keys and Endpoints
 ```bash
 az cognitiveservices account keys list --name MyLanguageService --resource-group MyAIResourceGroup
 ```
